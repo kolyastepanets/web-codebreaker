@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Codebreaker</title>
+    <link rel="stylesheet" href="/stylesheets/application.css" type="text/css">
+  </head>
+  <body>
+    <div id="container">
+
+      <div class="central_block">
+        <% if @game.win %>
+          <div class="text">
+            <h1>Congratulations! You have won!</h1>
+            <h2>Would you like to save result?</h2>
+          </div>
+        <% else %>
+          <div class="text">
+            <h1>Sorry! You have lost!</h1>
+            <h2>Would you like to save result?</h2>
+          </div>
+        <% end %>
+
+        <div class="saving_form">
+
+          <form method="post" action="/save_results" class="player_name">
+            <input name="player_name" type="text" placeholder="Your name" autofocus>
+            <input type="submit" value="Save">
+          </form>
+
+          <form method="post" action="/start_game" class="no">
+            <input type="submit" value="No" class="button_no">
+          </form>
+        </div>
+
+      </div>
+
+    </div>
+  </body>
+</html>

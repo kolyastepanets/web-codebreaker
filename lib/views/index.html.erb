@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Codebreaker</title>
+    <link rel="stylesheet" href="/stylesheets/application.css" type="text/css">
+  </head>
+  <body>
+    <div id="container">
+
+      <div class="main_block">
+
+        <h1>Codebreaker</h1>
+
+          <div class="left">
+            <h4>Left attempts: <%= @game.attempts %></h4>
+            <h4>Hints: <%= @game.hints %></h4>
+            <h4>Enter 4 digits from 1 to 6 to guess the secret code</h4>
+
+            <% if @game.win %>
+              <form method="post" action="/make_attempt">
+                <input name="possible_code" type="text" placeholder="Enter 4 digits" autofocus disabled="disabled">
+                <input type="submit" value="Guess!" disabled="disabled">
+              </form>
+            <% else %>
+              <form method="post" action="/make_attempt">
+                <input name="possible_code" type="text" placeholder="Enter 4 digits" autofocus minlength="4" maxlength="4" pattern="[1-6]{4}">
+                <input type="submit" value="Guess!">
+              </form>
+            <% end %>
+
+
+
+            <% if @game.hints == 1 %>
+              <form method="post" action="/get_hint">
+                <input name="get_hint" type="submit" value="Get hint">
+              </form>
+            <% else %>
+              <form method="post" action="/get_hint">
+                <input name="get_hint" type="submit" value="Get hint" disabled="disabled">
+               </form>
+            <% end %>
+
+            <form method="post" action="/start_game">
+              <input type="submit" value="New game">
+            </form>
+
+            <form method="post" action="/show_results">
+              <input type="submit" value="Show results">
+            </form>
+          </div>
+
+          <div class="right">
+            <div class="results">
+              <div class="hint">
+                <div class="div-for-h3"><h3>Hint:</h3></div>
+                <div class="div-for-h3"><h3><%= hint %></h3></div>
+              </div>
+
+                <div class="title">
+                  <div class="div-for-h3"><h3>Your attempt</h3></div>
+                  <div class="div-for-h3"><h3>Result</h3></div>
+                </div>
+
+                  <% if possible_codes && results %>
+                    <% possible_codes.each_with_index do |code, i| %>
+
+                      <div class="common_attempt">
+                        <div class="div-for-attempt">
+                          <p><%= code %></p>
+                        </div>
+
+                        <div class="div-for-attempt">
+                          <% if results[i] == "[]" %>
+                            <p>No matches</p>
+                          <% else %>
+                            <p><%= results[i] %></p>
+                          <% end %>
+                        </div>
+                      </div>
+
+                    <% end %>
+                  <% end %>
+
+            </div>
+          </div>
+        </div>
+
+    </div>
+  </body>
+</html>
+
+<!-- .gsub!(/[\[\]]/, '').gsub!(/[,]/, '').gsub!(/["]/, '').gsub!(/[ ]/, '') -->

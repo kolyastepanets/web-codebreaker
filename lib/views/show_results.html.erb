@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Codebreaker</title>
+    <link rel="stylesheet" href="/stylesheets/application.css" type="text/css">
+  </head>
+  <body>
+    <div id="container">
+
+        <div class="table_form">
+
+          <div class="head_form">
+            <div class="cell">
+              <p>Name</p>
+            </div>
+            <div class="cell">
+              <p>Number of made attempts</p>
+            </div>
+            <div class="cell">
+              <p>Secret code</p>
+            </div>
+          </div>
+
+          <div class="data">
+            <div class="cell">
+              <p><%= player_name %></p>
+            </div>
+            <div class="cell">
+              <p><%= 10 - @game.attempts %></p>
+            </div>
+            <div class="cell">
+              <p><%= possible_codes.last %></p>
+            </div>
+          </div>
+
+        </div>
+
+        <form method="post" action="/start_game" class="no">
+          <input type="submit" value="Start new game" class="button_no">
+        </form>
+
+        <form method="post" action="/" class="no">
+          <input type="submit" value="Back" class="button_no">
+        </form>
+
+    </div>
+
+  </body>
+</html>
