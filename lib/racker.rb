@@ -1,5 +1,5 @@
 require "erb"
-require_relative "../../../codebreaker/codebreaker/lib/codebreaker/game"
+require "codebreaker"
 
 class Racker
   def self.call(env)
@@ -12,6 +12,7 @@ class Racker
     possible_codes
     results
     hint
+    final_results
   end
 
   def response
@@ -83,13 +84,23 @@ class Racker
   end
 
   def save_results
-    @final_results = @request.session[:final_results]
-    # @final_results << @possible_codes.last
-    # @final_results << @game.attempts
+    @final_results << @request.params["player_name"]
+    @final_results << made_turns
+    @final_results << possible_codes.last
+    # @final_results << @result
     Rack::Response.new do |response|
-      response.set_cookie("player_name", @request.params["player_name"])
+      response.set_cookie("final_results", @final_results)
       response.redirect("/show_results")
     end
+  end
+
+  def final_results
+    @final_results = @request.cookies["final_results"] || []
+    @final_results = @final_results.split('&') unless @hint.is_a? Array
+  end
+
+  def made_turns
+    10 - @game.attempts
   end
 
   def player_name

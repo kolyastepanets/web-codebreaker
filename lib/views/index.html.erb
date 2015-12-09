@@ -31,20 +31,20 @@
 
 
             <% if @game.hints == 1 %>
-              <form method="post" action="/get_hint">
+              <form method="post" action="/get_hint" class="button_hint">
                 <input name="get_hint" type="submit" value="Get hint">
               </form>
             <% else %>
-              <form method="post" action="/get_hint">
+              <form method="post" action="/get_hint" class="button_hint">
                 <input name="get_hint" type="submit" value="Get hint" disabled="disabled">
                </form>
             <% end %>
 
-            <form method="post" action="/start_game">
+            <form method="post" action="/start_game" class="button">
               <input type="submit" value="New game">
             </form>
 
-            <form method="post" action="/show_results">
+            <form method="post" action="/show_results" class="button">
               <input type="submit" value="Show results">
             </form>
           </div>
@@ -70,11 +70,7 @@
                         </div>
 
                         <div class="div-for-attempt">
-                          <% if results[i] == "[]" %>
-                            <p>No matches</p>
-                          <% else %>
-                            <p><%= results[i] %></p>
-                          <% end %>
+                          <p><%= results[i] %></p>
                         </div>
                       </div>
 
@@ -88,5 +84,3 @@
     </div>
   </body>
 </html>
-
-<!-- .gsub!(/[\[\]]/, '').gsub!(/[,]/, '').gsub!(/["]/, '').gsub!(/[ ]/, '') -->

@@ -22,27 +22,27 @@
           </div>
 
           <div class="data">
-            <div class="cell">
-              <p><%= player_name %></p>
-            </div>
-            <div class="cell">
-              <p><%= 10 - @game.attempts %></p>
-            </div>
-            <div class="cell">
-              <p><%= possible_codes.last %></p>
-            </div>
+            <% if final_results %>
+              <% final_results.each_with_index do |val, i| %>
+                <div class="cell">
+                  <p><%= final_results[i] %></p>
+                </div>
+
+              <% end %>
+            <% end %>
           </div>
 
         </div>
 
-        <form method="post" action="/start_game" class="no">
-          <input type="submit" value="Start new game" class="button_no">
-        </form>
+        <div class="buttons">
+          <form method="post" action="/start_game" class="no">
+            <input type="submit" value="Start new game" class="button_no">
+          </form>
 
-        <form method="post" action="/" class="no">
-          <input type="submit" value="Back" class="button_no">
-        </form>
-
+          <form method="post" action="/" class="no">
+            <input type="submit" value="Back" class="button_no">
+          </form>
+        </div>
     </div>
 
   </body>

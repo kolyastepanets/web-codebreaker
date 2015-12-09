@@ -63,7 +63,7 @@ a {
 
 .left {
   float: left;
-  width: 50%;
+  width: 45%;
   margin-left: 15%;
 }
 
@@ -111,6 +111,16 @@ p {
   margin: 10px auto;
 }
 
+.button {
+  display: inline-block;
+  margin-left: 30px;
+  margin-top: 30px;
+}
+
+.button_hint {
+  display: inline-block;
+  margin-left: 0;
+}
 
 
 /*save result*/
@@ -151,14 +161,12 @@ h2 {
 
 .table_form {
   width: 543px;
-  height: 80px;
   margin: 0 auto;
-  border: 1px solid black;
+  min-height: 80px;
 }
 
 .head_form {
   height: 50%;
-  border-bottom: 1px solid black;
 }
 
 .data {
@@ -167,13 +175,9 @@ h2 {
 
 .cell {
   float: left;
-  border-right: 1px solid black;
+  border: 1px solid black;
   height: 100%;
-  width: 180px;
-}
-
-.cell:last-child {
-  border: none;
+  width: 179px;
 }
 
 p {

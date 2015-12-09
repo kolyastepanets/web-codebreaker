@@ -1,3 +1,9 @@
+GIT
+  remote: https://github.com/kolyastepanets/game-codebreaker.git
+  revision: 1eb50985405b3532ff5168647a7b5730b473f6bb
+  specs:
+    game-codebreaker (0.1.0)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -21,6 +27,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  game-codebreaker!
   rack
   rspec
 
