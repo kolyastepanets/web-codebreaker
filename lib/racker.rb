@@ -33,32 +33,38 @@ class Racker
   end
 
   def make_attempt
-    @possible_codes << @request.params["possible_code"]
 
-    @results << @game.guess_code(@request.params["possible_code"])
-
-    if @game.win
+    if @request.params["possible_code"] == ""
       Rack::Response.new do |response|
-        response.set_cookie("possible_codes", @possible_codes)
-        response.set_cookie("results", @results)
-        response.redirect("/final_form")
+        response.redirect("/")
       end
     else
-      if @game.attempts >= 1
-        Rack::Response.new do |response|
-          response.set_cookie("possible_codes", @possible_codes)
-          response.set_cookie("results", @results)
-          response.redirect("/")
-        end
-      else
+      @possible_codes << @request.params["possible_code"]
+
+      @results << @game.guess_code(@request.params["possible_code"])
+
+      if @game.win
         Rack::Response.new do |response|
           response.set_cookie("possible_codes", @possible_codes)
           response.set_cookie("results", @results)
           response.redirect("/final_form")
         end
+      else
+        if @game.attempts >= 1
+          Rack::Response.new do |response|
+            response.set_cookie("possible_codes", @possible_codes)
+            response.set_cookie("results", @results)
+            response.redirect("/")
+          end
+        else
+          Rack::Response.new do |response|
+            response.set_cookie("possible_codes", @possible_codes)
+            response.set_cookie("results", @results)
+            response.redirect("/final_form")
+          end
+        end
       end
     end
-
   end
 
   def start_game(new_game = false)
@@ -96,7 +102,7 @@ class Racker
 
   def final_results
     @final_results = @request.cookies["final_results"] || []
-    @final_results = @final_results.split('&') unless @hint.is_a? Array
+    @final_results = @final_results.split('&') unless @final_results.is_a? Array
   end
 
   def made_turns
